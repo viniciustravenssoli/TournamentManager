@@ -1,0 +1,21 @@
+<div class="container mt-4 mb-4">
+  <h2>Create Tournament</h2>
+
+  <form (ngSubmit)="createTournament()">
+    <div class="form-group">
+      <label for="name">Tournament Name</label>
+      <input [(ngModel)]="tournament.TournamentName" name="name" class="form-control" required />
+    </div>
+
+    <h3>Participants</h3>
+    <div id="participants">
+      <div class="form-group" *ngFor="let participant of participants; let i = index">
+        <label>Participant Name</label>
+        <input [(ngModel)]="participant.name" name="participants[{{i}}].name" class="form-control" required />
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-outline-secondary mt-3" (click)="addParticipant()">Add Participant</button>
+    <button type="submit" class="btn btn-primary mt-3">Create</button>
+  </form>
+</div>

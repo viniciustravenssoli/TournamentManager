@@ -1,0 +1,46 @@
+.container {
+  max-width: 900px;
+}
+
+.container {
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 20px auto;
+}
+
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  border-radius: 0.5rem;
+}
+
+.btn {
+  border-radius: 0.5rem;
+}

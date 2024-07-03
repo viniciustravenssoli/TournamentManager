@@ -1,0 +1,34 @@
+<div class="container mt-4 mb-4">
+  <h2>Tournaments</h2>
+
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Participants</th>
+        <th>Matches</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tournament of tournaments">
+        <td>{{ tournament.name }}</td>
+        <td>
+          <ul class="list-unstyled">
+            <li *ngFor="let participant of tournament.participants">{{ participant.name }}</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="list-unstyled">
+            <li *ngFor="let match of tournament.matches">{{ match.participant1Name }} vs {{ match.participant2Name }}</li>
+          </ul>
+        </td>
+        <td>
+          <a [routerLink]="['/tournament', tournament.tournamentId]" class="btn btn-primary">View Details</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a routerLink="/create-tournament" class="btn btn-primary mt-3">Create New Tournament</a>
+</div>
