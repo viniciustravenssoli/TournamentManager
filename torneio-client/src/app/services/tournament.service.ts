@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tournament, TournamentToList } from '../Models/models';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,14 @@ import { Tournament, TournamentToList } from '../Models/models';
 export class TournamentService {
   private apiUrl = 'http://localhost:5135/api/tournaments';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthServiceService) { }
 
   getAllTournaments(): Observable<TournamentToList[]> {
-    return this.http.get<TournamentToList[]>(this.apiUrl);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<TournamentToList[]>(this.apiUrl, { headers });
   }
 
   getTournamentById(id: number): Observable<Tournament> {
@@ -20,7 +25,11 @@ export class TournamentService {
   }
 
   createTournament(tournament: Tournament): Observable<Tournament> {
-    return this.http.post<Tournament>(this.apiUrl, tournament);
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post<Tournament>(this.apiUrl, tournament, { headers });
   }
 
   setMatchWinner(matchId: number, winnerId: number): Observable<void> {

@@ -1,16 +1,11 @@
 .container {
   max-width: 900px;
-}
-
-.container {
-  max-width: 900px;
   background-color: #ffffff;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin: 20px auto;
 }
-
 
 .table {
   margin-bottom: 2rem;
@@ -21,11 +16,6 @@
 thead.thead-dark th {
   background-color: #343a40;
   color: white;
-}
-
-.list-group-item {
-  background-color: #f8f9fa;
-  border-radius: 0.5rem;
 }
 
 h2 {
@@ -58,3 +48,29 @@ h4 {
   margin-bottom: 1rem;
 }
 
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  margin-right: 10px;
+}
+
+.btn {
+  border-radius: 0.5rem;
+}
+
+.select-winner {
+  display: flex;
+  align-items: center;
+}
+
+.select-winner label {
+  margin-right: 10px;
+}

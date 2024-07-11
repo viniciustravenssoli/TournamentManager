@@ -2,21 +2,27 @@
 using TournamentAPI.Data;
 using TournamentAPI.DTOs;
 using TournamentAPI.Models;
+using TournamentAPI.Services.LoggedUser;
 
 namespace TournamentAPI.Services;
 
 public class TournamentService : ITournamentService
 {
     private readonly ApplicationDbContext _context;
+    private readonly ILoggedUser _loggedUser;
 
-    public TournamentService(ApplicationDbContext context)
+    public TournamentService(ApplicationDbContext context, ILoggedUser loggedUser)
     {
         _context = context;
+        _loggedUser = loggedUser;
     }
 
     public async Task<List<TournamentDto>> GetAllTournamentsAsync()
     {
+        var loggedUser = await _loggedUser.GetUser();
+
         return await _context.Tournaments
+        .Where(t => t.UserId == loggedUser.UserId)
             .Select(t => new TournamentDto
             {
                 TournamentId = t.TournamentId,
@@ -91,7 +97,11 @@ public class TournamentService : ITournamentService
 
     public async Task CreateTournamentAsync(Tournament tournament, List<Participant> participants)
     {
+        var loggedUser = await _loggedUser.GetUser();
+
+        tournament.UserId = loggedUser.UserId;
         tournament.Participants = participants;
+        
         _context.Add(tournament);
         await _context.SaveChangesAsync();
         GenerateInitialMatches(tournament);

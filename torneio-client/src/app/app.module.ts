@@ -9,13 +9,17 @@ import { AppComponent } from './app.component';
 import { TournamentsComponent } from './components/tournaments/tournaments.component';
 import { TournamentDetailComponent } from './components/tournament-detail/tournament-detail.component';
 import { CreateTournamentComponent } from './components/create-tournament/create-tournament.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TournamentsComponent,
     TournamentDetailComponent,
-    CreateTournamentComponent
+    CreateTournamentComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

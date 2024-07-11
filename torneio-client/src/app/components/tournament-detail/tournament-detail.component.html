@@ -11,7 +11,7 @@
   <h3>Matches</h3>
   <div *ngFor="let round of matchesGroupedByRound | keyvalue">
     <h4 class="my-3">Round {{ round.key }}</h4>
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover rounded">
       <thead class="thead-dark">
         <tr>
           <th>Match</th>
@@ -24,18 +24,13 @@
           <td>{{ match.participant1Name }} vs {{ match.participant2Name }}</td>
           <td>{{ match.winnerName }}</td>
           <td *ngIf="!match.winnerName">
-            <form (submit)="setWinner(match.matchId, selectedWinnerId)">
-              <div class="form-row align-items-center">
-                <div class="col-auto">
-                  <select [(ngModel)]="selectedWinnerId" name="winnerId" class="form-control mb-2">
-                    <option [value]="match.participant1Id">{{ match.participant1Name }}</option>
-                    <option [value]="match.participant2Id">{{ match.participant2Name }}</option>
-                  </select>
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-2">Set Winner</button>
-                </div>
-              </div>
+            <form (submit)="setWinner(match.matchId, selectedWinnerId)" class="select-winner">
+              <label for="winnerId-{{match.matchId}}">Select Winner:</label>
+              <select id="winnerId-{{match.matchId}}" [(ngModel)]="selectedWinnerId" name="winnerId" class="form-control">
+                <option [value]="match.participant1Id">{{ match.participant1Name }}</option>
+                <option [value]="match.participant2Id">{{ match.participant2Name }}</option>
+              </select>
+              <button type="submit" class="btn btn-primary">Set Winner</button>
             </form>
           </td>
           <td *ngIf="match.winnerName">

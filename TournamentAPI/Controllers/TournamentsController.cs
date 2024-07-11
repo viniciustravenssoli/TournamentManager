@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TournamentAPI.Filters;
 using TournamentAPI.Models;
 using TournamentAPI.Services;
 
@@ -42,7 +43,6 @@ public class TournamentsController : ControllerBase
     public async Task<IActionResult> SetWinner([FromBody] SetWinnerRequest request)
     {
         var result = await _tournamentService.SetMatchWinnerAsync(request.MatchId, request.WinnerId);
-        var match = await _tournamentService.FindById(request.MatchId);
 
         if (!result)
         {
@@ -53,13 +53,14 @@ public class TournamentsController : ControllerBase
     }
 
     // POST: api/Tournaments
+    [ServiceFilter(typeof(AuthenticatedUserAttribute))]
     [HttpPost]
     public async Task<ActionResult<Tournament>> CreateTournament([FromBody] CreateTournamentRequest request)
     {
         var tournament = new Tournament
         {
             Name = request.TournamentName,
-            Participants = request.Participants
+            Participants = request.Participants,
         };
 
         await _tournamentService.CreateTournamentAsync(tournament, request.Participants);

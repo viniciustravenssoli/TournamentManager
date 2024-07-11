@@ -28,3 +28,8 @@ export interface Match {
   winnerName: string | null;
   round: number;
 }
+
+export interface AuthResponse {
+  name: string;
+  token: string;
+}
