@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TournamentAPI.DTOs;
 using TournamentAPI.Filters;
 using TournamentAPI.Models;
 using TournamentAPI.Services;
@@ -67,16 +68,3 @@ public class TournamentsController : ControllerBase
         return Created();
     }
 }
-
-public class SetWinnerRequest
-{
-    public int MatchId { get; set; }
-    public int WinnerId { get; set; }
-}
-
-public class CreateTournamentRequest
-{
-    public string TournamentName { get; set; }
-    public List<Participant> Participants { get; set; }
-}
-

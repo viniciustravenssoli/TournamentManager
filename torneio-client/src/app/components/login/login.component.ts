@@ -9,6 +9,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class LoginComponent {
   user = { email: '', password: '' };
+  errorMessage: string = '';
 
   constructor(private authService: AuthServiceService, private router: Router) {}
 
@@ -21,6 +22,7 @@ export class LoginComponent {
       },
       (error) => {
         console.error('Login failed', error);
+        this.errorMessage = 'Invalid email or password. Please try again.';
       }
     );
   }

@@ -29,6 +29,7 @@ export class TournamentService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
+
     return this.http.post<Tournament>(this.apiUrl, tournament, { headers });
   }
 

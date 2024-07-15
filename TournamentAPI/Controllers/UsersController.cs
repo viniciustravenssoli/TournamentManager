@@ -20,22 +20,27 @@ namespace TournamentAPI.Controllers
             _userService = userService;
         }
 
-         [HttpPost("Create")]
+        [HttpPost("Create")]
         public async Task<ActionResult<User>> CreateUser([FromBody] CreateUserDTO request)
         {
             await _userService.Create(request);
 
             return Created();
-            
+
         }
 
-         [HttpPost("Login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<ResponseLogin>> Login([FromBody] LoginRequest request)
         {
             var result = await _userService.Login(request.Password, request.Email);
 
+            if (result == null)
+            {
+                return BadRequest("Invalid email or password.");
+            }
+
             return Created(string.Empty, result);
-            
+
         }
     }
 }

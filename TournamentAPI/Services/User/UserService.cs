@@ -37,20 +37,17 @@ namespace TournamentAPI.Services.User
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<ResponseLogin> Login(string password, string email)
+        public async Task<ResponseLogin?> Login(string password, string email)
         {
             var hashedPasswordRequest = _passwordEncryption.Criptograph(password);
 
             var user = await _dbContext.Users
             .FirstOrDefaultAsync(c => c.Email.Equals(email) && c.PasswordHash.Equals(hashedPasswordRequest));
 
-            if (user is null)
-                return new
-                ResponseLogin
-                {
-                    Name = hashedPasswordRequest
-                };
-
+            if (user == null)
+            {
+                return null;
+            }
 
             return new ResponseLogin
             {
