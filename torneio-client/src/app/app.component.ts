@@ -10,14 +10,16 @@ import { AuthServiceService } from './services/auth-service.service';
 export class AppComponent {
   title = 'torneio-client';
 
-  constructor(private authService: AuthServiceService, private router: Router) {}
+  constructor(private authService: AuthServiceService, private router: Router) { }
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/register']);
+    if (confirm('Are you sure you want to log out?')) {
+      this.authService.logout();
+      this.router.navigate(['/register']);
+    }
   }
 }
